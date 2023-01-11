@@ -1,5 +1,7 @@
 public
 
+build
+
 # Created by https://www.gitignore.io/api/node,windows,macos,linux,sublimetext,emacs,vim,visualstudiocode
 
 ### Emacs ###
@@ -154,8 +156,13 @@ typings/
 .yarn/unplugged
 .yarn/build-state.yml
 
+######### /!\ Dont' forget to configure IDE for proper typescript implementation
+# https://yarnpkg.com/getting-started/editor-sdks
+
 # dotenv environment variables file
-.env
+env/*
+# /!\ Must keep env/public
+!env/public
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache

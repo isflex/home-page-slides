@@ -1,0 +1,57 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "removeComments": false,
+    "skipLibCheck": true,
+    "strict": true,
+    "downlevelIteration": true,
+    "target": "es2018",
+    "preserveConstEnums": true,
+    "forceConsistentCasingInFileNames": false,
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      // "flexiness": ["../types"],
+      // "flex-gateway-ssr/*": ["../../gateway/nextjs-telenko/src/*"],
+      // "flex-design-system-react-ts/*": ["src/*"],
+      // "flex-design-system-framework/*": ["../design-system-framework/src/modules3/default/*"],
+      // "flex-domain-lib-mobx-react-router/*": ["../domain-lib-mobx-react-router/src/*"],
+    },
+  },
+  "include": [
+    "src/**/*",
+    // "src/flexiness.d.ts",
+    "src/static.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "build/**/*",
+    "dist/**/*",
+  ],
+  "references": [
+    // { "path": "../../gateway/nextjs-telenko/tsconfig.build.json" },
+    // { "path": "../design-system-framework/tsconfig.build.json" },
+    // { "path": "../domain-lib-global-react/tsconfig.build.json" },
+    // { "path": "../domain-lib-mobx-react-router/tsconfig.build.json" },
+    // { "path": "../domain-lib-flex-browser-router/tsconfig.build.json" },
+    // { "path": "../domain-lib-utils/tsconfig.build.json" },
+    // { "path": "../domain-app/tsconfig.build.json" },
+  ]
+}

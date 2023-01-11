@@ -1,20 +1,63 @@
 {
-  "name": "marp-cli-example",
+  "name": "@flexiness/slides",
   "version": "0.0.0",
-  "author": "Yuki Hattori <yukihattori1116@gmail.com>",
+  "contributors": [
+    "Inoe Scherer <schererinoe@gmail.com>",
+    "Yuki Hattori <yukihattori1116@gmail.com>"
+  ],
   "license": "WTFPL",
   "private": true,
   "scripts": {
-    "build": "rimraf public && yarn og-image && yarn deck",
-    "deck": "marp --no-stdin PITCHME.md -o public/index.html && ncp assets public/assets",
-    "og-image": "marp --no-stdin PITCHME.md -o public/og-image.jpg",
-    "start": "marp -ps .",
-    "vercel-build": "yarn dlx puppeteer && MARP_USER=root CHROME_PATH=$(node -e \"console.log(require('puppeteer').executablePath())\") yarn build"
+    "dev": "marp -ps --html --input-dir src/marp --config-file ./marp.config.js",
+    "build": "env-cmd -f ./env/public/.env.$FLEX_MODE yarn build-marp && yarn build:webpack",
+    "build-marp": "rimraf public && yarn og-image && yarn deck",
+    "build:webpack": "webpack --config webpack.config.js --mode development",
+    "deck": "marp --no-stdin --html --input-dir src/marp -o public -c ./marp.config.js && ncp src/marp/assets public/assets",
+    "og-image": "marp --no-stdin --input-dir src/marp -o public -c ./marp.config.js ",
+    "start": "yarn build && yarn serve:express",
+    "serve:express": "node server.js",
+    "launch": "env-cmd -f ./env/public/.env.$FLEX_MODE yarn launch:express",
+    "launch:express": "echo \"$FLEX_SERVER_LAUNCHING $FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST\" && yarn serve:express",
+    "vercel-build": "yarn dlx puppeteer && MARP_USER=root CHROME_PATH=$(node -e \"console.log(require('puppeteer').executablePath())\") yarn build-marp"
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^2.3.0",
+    "@telenko/node-mf": "0.0.7",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-helmet": "6.1.5",
+    "crypto-browserify": "3.12.0",
+    "domhandler": "5.0.3",
+    "html-loader": "^4.2.0",
+    "html-react-parser": "3.0.7",
     "ncp": "^2.0.0",
-    "rimraf": "^3.0.2"
+    "regenerator-runtime": "0.13.9",
+    "rimraf": "^3.0.2",
+    "stream-browserify": "3.0.0",
+    "webpack-cli": "4.10.0"
+  },
+  "dependencies": {
+    "cors": "2.8.5",
+    "css-loader": "^6.7.1",
+    "dotenv-expand": "9.0.0",
+    "env-cmd": "^10.1.0",
+    "express": "4.18.2",
+    "file-loader": "6.2.0",
+    "find-yarn-workspace-root": "2.0.0",
+    "fork-ts-checker-webpack-plugin": "7.2.12",
+    "html-webpack-plugin": "5.5.0",
+    "mini-css-extract-plugin": "2.6.1",
+    "nocache": "3.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet": "6.1.0",
+    "regex-escape": "3.4.10",
+    "serve-index": "1.9.1",
+    "serve-static": "1.15.0",
+    "ts-loader": "9.3.1",
+    "tsconfig-paths-webpack-plugin": "3.5.2",
+    "typescript": "4.7.4",
+    "webpack": "5.74.0"
   },
   "packageManager": "yarn@3.3.1"
 }

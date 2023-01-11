@@ -1,3 +1,6 @@
 {
-  "recommendations": ["marp-team.marp-vscode"]
+  "recommendations": [
+    "marp-team.marp-vscode",
+    "arcanis.vscode-zipfs"
+  ]
 }
