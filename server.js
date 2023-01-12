@@ -44,27 +44,25 @@ var app = express();
 
 app.use(cors(corsOptions));
 
-if (process.env.FLEX_MODE === 'development' || process.env.FLEX_MODE === 'build') {
-  app.use('/', express.static(path.join(__dirname, 'public'), {
-    index: ['about.html'],
-    // maxAge: '1d',
-    // setHeaders: setCustomCacheControl
-  }));
-} else {
-  app.use('/node', express.static(path.join(__dirname, 'build/node'), { 
-    // maxAge: '1d',
-    // setHeaders: setCustomCacheControl
-  }));
+app.use('/', express.static(path.join(__dirname, 'public'), {
+  index: ['about.html'],
+  // maxAge: '1d',
+  // setHeaders: setCustomCacheControl
+}));
 
-  app.use('/web', express.static(path.join(__dirname, 'build/web'), { 
-    index: ['index.html'],
-    // maxAge: '1d',
-    // setHeaders: setCustomCacheControl
-  }));
+app.use('/node', express.static(path.join(__dirname, 'build/node'), { 
+  // maxAge: '1d',
+  // setHeaders: setCustomCacheControl
+}));
 
-  // shows you the directory/file list at app root
-  app.use('/', serveIndex(path.join(__dirname, 'build'), { icons: true }));
-}
+app.use('/web', express.static(path.join(__dirname, 'build/web'), { 
+  index: ['index.html'],
+  // maxAge: '1d',
+  // setHeaders: setCustomCacheControl
+}));
+
+// shows you the directory/file list at app root
+app.use('/', serveIndex(path.join(__dirname, 'build'), { icons: true }));
 
 // app.use(nocache());
 

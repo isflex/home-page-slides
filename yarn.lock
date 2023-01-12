@@ -44,6 +44,7 @@ __metadata:
   resolution: "@flexiness/slides@workspace:."
   dependencies:
     "@marp-team/marp-cli": ^2.3.0
+    "@marp-team/marpit": 2.4.2
     "@telenko/node-mf": 0.0.7
     "@types/react": 18.0.26
     "@types/react-dom": ^18.0.6
@@ -67,6 +68,7 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     react-helmet: 6.1.0
+    react-iframe: 1.8.5
     regenerator-runtime: 0.13.9
     regex-escape: 3.4.10
     rimraf: ^3.0.2
@@ -191,7 +193,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@marp-team/marpit@npm:^2.4.2":
+"@marp-team/marpit@npm:2.4.2, @marp-team/marpit@npm:^2.4.2":
   version: 2.4.2
   resolution: "@marp-team/marpit@npm:2.4.2"
   dependencies:
@@ -3907,6 +3909,17 @@ __metadata:
   peerDependencies:
     react: ">=16.3.0"
   checksum: a4998479dab7fc1c2799eddefb1870a9d881b5f71cfdf97979a9882e42f4bb50402d55335f308f461e735e01a06f46b16cc7b4e6bcb22c7a4a6f85a753c5c106
+  languageName: node
+  linkType: hard
+
+"react-iframe@npm:1.8.5":
+  version: 1.8.5
+  resolution: "react-iframe@npm:1.8.5"
+  dependencies:
+    object-assign: ^4.1.1
+  peerDependencies:
+    react: ">=16.x.x"
+  checksum: b2bb08039329035d44d6d85613337e200b7fe6d854dd45a54c34fc53ff4118874f23e17c7dbbb4825cd3d4b874ae4436edcabc819308e1aea4fdc3730ea50df0
   languageName: node
   linkType: hard
 

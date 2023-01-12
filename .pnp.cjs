@@ -29,6 +29,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./",\
           "packageDependencies": [\
             ["@marp-team/marp-cli", "npm:2.3.0"],\
+            ["@marp-team/marpit", "npm:2.4.2"],\
             ["@telenko/node-mf", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:0.0.7"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -52,6 +53,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:18.2.0"],\
             ["react-helmet", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:6.1.0"],\
+            ["react-iframe", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:1.8.5"],\
             ["regenerator-runtime", "npm:0.13.9"],\
             ["regex-escape", "npm:3.4.10"],\
             ["rimraf", "npm:3.0.2"],\
@@ -113,6 +115,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["@flexiness/slides", "workspace:."],\
             ["@marp-team/marp-cli", "npm:2.3.0"],\
+            ["@marp-team/marpit", "npm:2.4.2"],\
             ["@telenko/node-mf", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:0.0.7"],\
             ["@types/react", "npm:18.0.26"],\
             ["@types/react-dom", "npm:18.0.10"],\
@@ -136,6 +139,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:18.2.0"],\
             ["react-helmet", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:6.1.0"],\
+            ["react-iframe", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:1.8.5"],\
             ["regenerator-runtime", "npm:0.13.9"],\
             ["regex-escape", "npm:3.4.10"],\
             ["rimraf", "npm:3.0.2"],\
@@ -4726,6 +4730,29 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-fast-compare", "npm:3.2.0"],\
             ["react-side-effect", "virtual:eb6208f4c495171ad2a40206404481aa0e4edd203cb39efaa23188fdea01568c37342e8c550553c581ebd25392ed6190ebf044852ac18bb1bb361e36a5711ac9#npm:2.1.2"]\
+          ],\
+          "packagePeers": [\
+            "@types/react",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["react-iframe", [\
+        ["npm:1.8.5", {\
+          "packageLocation": "./.yarn/cache/react-iframe-npm-1.8.5-d7ea2e0c6b-b2bb080393.zip/node_modules/react-iframe/",\
+          "packageDependencies": [\
+            ["react-iframe", "npm:1.8.5"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:1.8.5", {\
+          "packageLocation": "./.yarn/__virtual__/react-iframe-virtual-d95f44cdcc/0/cache/react-iframe-npm-1.8.5-d7ea2e0c6b-b2bb080393.zip/node_modules/react-iframe/",\
+          "packageDependencies": [\
+            ["react-iframe", "virtual:c183d419e8262ee45a5c44d8bc453ba09cc100bbce5b501254b86f602cd99f933da8a8c171d70721469e83e1dda8911f4ff9af65b204365b4bb51c3267f0294d#npm:1.8.5"],\
+            ["@types/react", "npm:18.0.26"],\
+            ["object-assign", "npm:4.1.1"],\
+            ["react", "npm:18.2.0"]\
           ],\
           "packagePeers": [\
             "@types/react",\

@@ -9,9 +9,10 @@
   "private": true,
   "scripts": {
     "dev": "marp -ps --html --input-dir src/marp --config-file ./marp.config.js",
-    "build": "env-cmd -f ./env/public/.env.$FLEX_MODE yarn build-marp && yarn build:webpack",
+    "build": "env-cmd -f ./env/public/.env.$FLEX_MODE yarn build-marp && yarn sed:html && yarn build:webpack",
     "build-marp": "rimraf public && yarn og-image && yarn deck",
     "build:webpack": "webpack --config webpack.config.js --mode development",
+    "sed:html": "sed -i 's+body{background:#000;overflow:hidden}+body{background:transparent;overflow:hidden}+g' public/about.html",
     "deck": "marp --no-stdin --html --input-dir src/marp -o public -c ./marp.config.js && ncp src/marp/assets public/assets",
     "og-image": "marp --no-stdin --input-dir src/marp -o public -c ./marp.config.js ",
     "start": "yarn build && yarn serve:express",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@marp-team/marp-cli": "^2.3.0",
+    "@marp-team/marpit": "2.4.2",
     "@telenko/node-mf": "0.0.7",
     "@types/react": "18.0.26",
     "@types/react-dom": "^18.0.6",

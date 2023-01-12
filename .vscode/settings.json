@@ -2,7 +2,7 @@
 // https://marketplace.visualstudio.com/items?itemName=marp-team.marp-vscode
 {
   "markdown.marp.themes": [
-    "./src/marp/themes/example.css"
+    "./src/marp/themes/flexiness"
   ],
   "search.exclude": {
     "**/.yarn": true,
