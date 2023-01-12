@@ -1,7 +1,9 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { Marp } from '@marp-team/marp-react'
 import parse, { HTMLReactParserOptions, Element, domToReact, htmlToDOM } from 'html-react-parser';
 import htmlStatic from '../public/about.html';
+import markdown from './marp/about.md';
 
 // console.log(domToReact);
 // console.log(htmlToDOM);
@@ -33,12 +35,10 @@ const options: HTMLReactParserOptions = {
   }
 };
 
-const jsxContent = parse(htmlStatic, options)
+// const markdown = parse(htmlStatic, options)
 
 const App = () => (
-  <>
-    { jsxContent }
-  </>
+  <Marp markdown={markdown} />
 )
 
 
