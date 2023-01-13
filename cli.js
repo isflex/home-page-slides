@@ -29,15 +29,25 @@ options = parse(process.argv.slice(2))
 console.log(options)
 method = options?.method || 'start'
 
-if (method === 'launch') {
+if (method === 'start') {
   // console.log('Will launch another day!!')
-  return sh(`yarn workspace @flexiness/slides start`).then((result) => {
-    console.log(result)
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+  const scriptCmds = [
+    `cd ${workDir}`,
+    `yarn install`
+    `yarn run start`
+  ]
+  
+  Promise.all(scriptCmds.map(currentCmd => {
+    return sh(currentCmd).then((result) => {
+      console.log(result)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }))
+  
 } else if (method === 'install' && options?.dir) {
+
   const dst_directory = `${process.env.PROJECT_CWD}/${options.dir}`
   return sh(`rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`).then((result) => {
     console.log(result)
@@ -45,6 +55,7 @@ if (method === 'launch') {
   .catch((error) => {
     console.log(error)
   })
+  
 }
 
 // sh(`echo $(rsync --version)`).then((result) => {
