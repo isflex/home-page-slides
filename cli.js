@@ -51,17 +51,14 @@ if (method === 'start') {
   // From root run : yarn slides cli --method install --dir packages/slides
 
   const dst_directory = `${process.env.PROJECT_CWD}/${options.dir}`
-  let prj_name
-
-  sh(`jq '.name' ${`${workDir}/package.json`}`).then((result) => {
-    prj_name = result
-    console.log(prj_name)
+  const prj_name = sh(`jq '.name' ${`${workDir}/package.json`}`).then((result) => {
+    console.log(result)
+    return result
   })
   .catch((error) => {
     console.log(error)
+    return Promise.reject(new Error('No prj_name'))
   })
-
-  if (!prj_name) return Promise.reject(new Error('No prj_name'))
 
   const scriptCmds = [
     `rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`,
