@@ -90,11 +90,10 @@ h1 {
   </div>
   </div>
 
-* a templating *one stop solution* for everything
+* a *one stop templating solution* for everything
   https://nx.dev/concepts/integrated-vs-package-based
 
-* a project that is *baked in* and 100% commited to a chosen tech stack
-  ...because *ejecting* from a CRA or *jail breaking* from an OS will become an enormous headache later on down the track !!
+* a project that is *baked in* and 100% commited to a chosen tech stack... because *ejecting* from a CRA or *jail breaking* from an OS or framework will become an enormous headache later on down the track !!
 
 <!-- _color: "#32325d" -->
 

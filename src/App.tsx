@@ -1,43 +1,4 @@
 import React from 'react'
-import Iframe from 'react-iframe'
-// import { Helmet } from 'react-helmet'
-// import parse, { HTMLReactParserOptions, Element, domToReact, htmlToDOM } from 'html-react-parser';
-// import htmlStatic from '../public/about.html';
-
-// console.log(domToReact);
-// console.log(htmlToDOM);
-
-// const trimNodeNamesArray = ['!doctype', 'html', 'body', 'head']
-// const removeNodeNamesArray = ['title', 'meta']
-
-// const optionsHead: HTMLReactParserOptions = {
-//   replace: (domNode) => {
-//     if (domNode instanceof Element && removeNodeNamesArray.includes(domNode.name) ) {
-//       return <></>
-//     }
-//     if (domNode instanceof Element && domNode.name === 'style' && domNode.children.length) {
-//       return (
-//         <Helmet>
-//           <style>
-//             {domToReact(domNode.children, optionsHead)}
-//           </style>
-//         </Helmet>
-//       )
-//     }
-//   }
-// };
-
-// const optionsBody: HTMLReactParserOptions = {
-//   replace: (domNode) => {
-//     if (domNode instanceof Element && trimNodeNamesArray.includes(domNode.name) && domNode.children.length) {
-//       return (
-//         <>
-//           {domToReact(domNode.children, optionsBody)}
-//         </>
-//       )
-//     }
-//   }
-// };
 
 var body = document.body,
     html = document.documentElement;
