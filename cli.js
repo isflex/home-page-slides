@@ -39,7 +39,7 @@ if (method === 'launch') {
   })
 } else if (method === 'install' && options?.dir) {
   const dst_directory = `${process.env.PROJECT_CWD}/${options.dir}`
-  return sh(`rsync -a --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ./ ${dst_directory}/`).then((result) => {
+  return sh(`rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`).then((result) => {
     console.log(result)
   })
   .catch((error) => {
