@@ -8,6 +8,7 @@
 // https://linuxize.com/post/how-to-exclude-files-and-directories-with-rsync/
 
 const sh = require('shell-exec')
+const parse = require('get-them-args')
 
 // sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`)
 // console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
@@ -19,9 +20,12 @@ const sh = require('shell-exec')
 
 console.log(`$FLEX_MODE : ${process.env.FLEX_MODE}`)
 console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
+console.log(sh(`echo $(rsync --version) 2>&1`))
 
-const args = require('get-them-args')(process.argv.slice(2))
-console.log(`args for ${process.env.npm_package_name} : ${args}.`)
+// const args = require('get-them-args')(process.argv.slice(2))
+// console.log(`args for ${process.env.npm_package_name} : ${args}.`)
+
+console.log(parse(process.argv.slice(2)))
 
 const dst_directory = `${process.env.PROJECT_CWD}/packages/slides`
 
@@ -32,7 +36,6 @@ new Promise(() => {
       if (!stdout) return res
 
       console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
-      console.log(sh(`echo $(rsync --version)`))
       
       sh(`mkdir -p ${dst_directory}`)
       sh(`echo $(rsync --version)`)
