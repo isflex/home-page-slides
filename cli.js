@@ -42,19 +42,32 @@ getProjectName()
       console.log(`Installing ${prj_name} as new workspace into ${process.env.npm_package_name}`)
       
       const scriptCmds = [
-        `jq  'del(.bin) | del(.scripts.cli)' ${`${workDir}/package.json`} > "tmp" && mv "tmp" ${`${workDir}/package.json`}`
+        `jq 'del(.bin) | del(.scripts.cli)' ${`${workDir}/package.json`} > "tmp" && mv "tmp" ${`${workDir}/package.json`}`,
         `rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`,
         `jq --arg dir "${options.dir}" --arg name "${prj_name}" 'del(.dependencies[($name)]) | .resolutions += {($name):("workspace:./"+$dir)} | .workspaces.packages |= (.+ ["./"+$dir] | unique)' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
       ]
 
-      Promise.all(scriptCmds.map(currentCmd => {
-        return sh(currentCmd).then((result) => {
-          console.log(result)
+      // Promise.all(scriptCmds.map(currentCmd => {
+      //   return sh(currentCmd).then((result) => {
+      //     console.log(result)
+      //   })
+      //   .catch((error) => {
+      //     console.log(error)
+      //   })
+      // }))
+
+      // https://stackoverflow.com/questions/48506029/synchronous-loop-in-promise-all
+      scriptCmds.reduce(function(p, currentCmd) {
+        return p.then(function() {
+          return sh(currentCmd).then((result) => {
+            console.log(result)
+          })
         })
-        .catch((error) => {
-          console.log(error)
-        })
-      }))
+      }, Promise.resolve()).then(function() {
+        console.log("⚡️All done here⚡️=> Don't forget to yarn install")
+      }).catch(function(error) {
+        console.log(error)
+      });
 
     } else {
       const regex = /^@(.*)\//
