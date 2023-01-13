@@ -27,11 +27,11 @@ console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
 console.log("Current working directory : ", workDir)
 options = parse(process.argv.slice(2))
 console.log(options)
-method = options?.method || 'launch'
+method = options?.method || 'start'
 
 if (method === 'launch') {
   // console.log('Will launch another day!!')
-  return sh(`yarn launch`).then((result) => {
+  return sh(`yarn workspace @flexiness/slides start`).then((result) => {
     console.log(result)
   })
   .catch((error) => {
