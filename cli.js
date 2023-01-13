@@ -20,18 +20,24 @@ const sh = require('shell-exec')
 console.log(`$FLEX_MODE : ${process.env.FLEX_MODE}`)
 console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
 
-// const args = require('get-them-args')(process.argv.slice(2))
-// console.log(`args for ${process.env.npm_package_name} : ${args}.`)
+const args = require('get-them-args')(process.argv.slice(2))
+console.log(`args for ${process.env.npm_package_name} : ${args}.`)
 
 const dst_directory = `${process.env.PROJECT_CWD}/packages/slides`
 
 new Promise(() => {
   return sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`)
-    .then(() => {
+    .then(res => {
+      const { stdout } = res
+      if (!stdout) return res
+
       console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
+      console.log(sh(`echo $(rsync --version)`))
+      
       sh(`mkdir -p ${dst_directory}`)
       sh(`echo $(rsync --version)`)
       sh(`rsync -a --exclude-from='./cli-setup-monorepo-exclude-file.txt' ./ ${dst_directory}/`)
+
       console.log(`Successfully completed 'setup:monorepo' in ${process.env.npm_package_name}.`)
     })
     .catch((error) => {
