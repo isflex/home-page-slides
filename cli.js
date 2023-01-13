@@ -20,12 +20,21 @@ const parse = require('get-them-args')
 
 console.log(`$FLEX_MODE : ${process.env.FLEX_MODE}`)
 console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
-console.log(sh(`echo $(rsync --version) 2>&1`))
-
-// const args = require('get-them-args')(process.argv.slice(2))
-// console.log(`args for ${process.env.npm_package_name} : ${args}.`)
-
 console.log(parse(process.argv.slice(2)))
+sh(`echo $(rsync --version)`).then((result) => {
+  console.log(result)
+})
+.catch((error) => {
+  console.log(error)
+})
+
+sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`).then((result) => {
+  console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
+  console.log(result)
+})
+.catch((error) => {
+  console.log(error)
+})
 
 const dst_directory = `${process.env.PROJECT_CWD}/packages/slides`
 
