@@ -8,7 +8,7 @@
   "license": "WTFPL",
   "private": true,
   "scripts": {
-    "cli:bin": "@flexiness/slides",
+    "cli": "@flexiness/slides",
     "dev": "marp -ps --html --input-dir src/marp --config-file ./marp.config.js",
     "build": "env-cmd -f ./env/public/.env.$FLEX_MODE yarn build-marp && yarn sed:html && yarn build:webpack",
     "build-marp": "rimraf public && yarn og-image && yarn deck",

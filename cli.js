@@ -33,7 +33,7 @@ if (method === 'start') {
   // console.log('Will launch another day!!')
   const scriptCmds = [
     `cd ${workDir}`,
-    `yarn install`
+    `yarn install`,
     `yarn run start`
   ]
   
@@ -48,14 +48,41 @@ if (method === 'start') {
   
 } else if (method === 'install' && options?.dir) {
 
+  // From root run : yarn slides cli --method install --dir packages/slides
+
   const dst_directory = `${process.env.PROJECT_CWD}/${options.dir}`
-  return sh(`rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`).then((result) => {
-    console.log(result)
+  let prj_name
+
+  sh(`jq '.name' ${`${workDir}/package.json`}`).then((result) => {
+    prj_name = result
+    console.log(prj_name)
+    
+    const scriptCmds = [
+      `rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`,
+      `jq --arg dir "${options.dir}" --arg name "${prj_name}" '.resolutions += {($name):("workspace:./"+$dir)}' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
+      `jq --arg dir "${options.dir}" '.workspaces.packages |= (.+ ["./"+$dir] | unique)' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
+    ]
+
+    Promise.all(scriptCmds.map(currentCmd => {
+      return sh(currentCmd).then((result) => {
+        console.log(result)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }))
   })
   .catch((error) => {
     console.log(error)
   })
-  
+
+  // return sh(`rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`).then((result) => {
+  //   console.log(result)
+  // })
+  // .catch((error) => {
+  //   console.log(error)
+  // })
+
 }
 
 // sh(`echo $(rsync --version)`).then((result) => {
