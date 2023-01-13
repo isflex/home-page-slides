@@ -9,13 +9,13 @@
 
 const sh = require('shell-exec')
 
-sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`)
-console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
+// sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`)
+// console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
 
-sh(`set -a`)
-sh(`. ./env/public/.env.${process.env.FLEX_MODE}`)
-sh(`set +a`)
-console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
+// sh(`set -a`)
+// sh(`. ./env/public/.env.${process.env.FLEX_MODE}`)
+// sh(`set +a`)
+// console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
 
 console.log(`$FLEX_MODE : ${process.env.FLEX_MODE}`)
 console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
@@ -26,8 +26,12 @@ console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
 const dst_directory = `${process.env.PROJECT_CWD}/packages/slides`
 
 new Promise(() => {
-  return sh(`mkdir -p ${dst_directory} && echo $(rsync --version) && rsync -a --exclude-from='./cli-setup-monorepo-exclude-file.txt' ./ ${dst_directory}/`)
+  return sh(`env-cmd -f ./env/public/.env.${process.env.FLEX_MODE}`)
     .then(() => {
+      console.log(`$FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR : ${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PROJECT_DIR}`)
+      sh(`mkdir -p ${dst_directory}`)
+      sh(`echo $(rsync --version)`)
+      sh(`rsync -a --exclude-from='./cli-setup-monorepo-exclude-file.txt' ./ ${dst_directory}/`)
       console.log(`Successfully completed 'setup:monorepo' in ${process.env.npm_package_name}.`)
     })
     .catch((error) => {
