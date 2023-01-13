@@ -1,1 +1,3 @@
 yarn.lock
+cli-setup-monorepo-exclude-file.txt
+cli.js
