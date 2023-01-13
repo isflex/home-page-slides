@@ -30,21 +30,21 @@ console.log(options)
 method = options?.method || 'start'
 
 if (method === 'start') {
-  // console.log('Will launch another day!!')
-  const scriptCmds = [
-    `cd ${workDir}`,
-    `yarn install`,
-    `yarn run start`
-  ]
+  console.log('Will launch another day!!')
+  // const scriptCmds = [
+  //   `cd ${workDir}`,
+  //   `yarn install`,
+  //   `yarn run start`
+  // ]
   
-  Promise.all(scriptCmds.map(currentCmd => {
-    return sh(currentCmd).then((result) => {
-      console.log(result)
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-  }))
+  // Promise.all(scriptCmds.map(currentCmd => {
+  //   return sh(currentCmd).then((result) => {
+  //     console.log(result)
+  //   })
+  //   .catch((error) => {
+  //     console.log(error)
+  //   })
+  // }))
   
 } else if (method === 'install' && options?.dir) {
 
@@ -56,25 +56,27 @@ if (method === 'start') {
   sh(`jq '.name' ${`${workDir}/package.json`}`).then((result) => {
     prj_name = result
     console.log(prj_name)
-    
-    const scriptCmds = [
-      `rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`,
-      `jq --arg dir "${options.dir}" --arg name "${prj_name}" '.resolutions += {($name):("workspace:./"+$dir)}' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
-      `jq --arg dir "${options.dir}" '.workspaces.packages |= (.+ ["./"+$dir] | unique)' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
-    ]
-
-    Promise.all(scriptCmds.map(currentCmd => {
-      return sh(currentCmd).then((result) => {
-        console.log(result)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
-    }))
   })
   .catch((error) => {
     console.log(error)
   })
+
+  if (!prj_name) return Promise.reject(new Error('No prj_name'))
+
+  const scriptCmds = [
+    `rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`,
+    `jq --arg dir "${options.dir}" --arg name "${prj_name}" '.resolutions += {($name):("workspace:./"+$dir)}' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
+    `jq --arg dir "${options.dir}" '.workspaces.packages |= (.+ ["./"+$dir] | unique)' ${`${process.env.PROJECT_CWD}/package.json`} > "tmp" && mv "tmp" ${`${process.env.PROJECT_CWD}/package.json`}`
+  ]
+
+  Promise.all(scriptCmds.map(currentCmd => {
+    return sh(currentCmd).then((result) => {
+      console.log(result)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  }))
 
   // return sh(`rsync -a --progress --exclude-from='${`${workDir}/cli-setup-monorepo-exclude-file.txt`}' ${workDir}/ ${dst_directory}/`).then((result) => {
   //   console.log(result)
