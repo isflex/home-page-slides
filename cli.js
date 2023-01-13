@@ -7,6 +7,7 @@
 // https://docs.npmjs.com/cli/v9/configuring-npm/package-json#directoriesbin
 // https://linuxize.com/post/how-to-exclude-files-and-directories-with-rsync/
 
+const path = require('path')
 const sh = require('shell-exec')
 const parse = require('get-them-args')
 let options = {}
