@@ -22,16 +22,16 @@ let method
 
 console.log(`$FLEX_MODE : ${process.env.FLEX_MODE}`)
 console.log(`$PROJECT_CWD : ${process.env.PROJECT_CWD}`)
-console.log("Current working directory: ", process.cwd())
+console.log("Current working directory : ", path.resolve(__dirname))
 options = parse(process.argv.slice(2))
 console.log(options)
-method = options?.method || 'install'
+method = options?.method || 'launch'
 
 if (method === 'launch') {
   console.log('Will launch another day!!')
 } else if (method === 'install' && options?.dir) {
   const dst_directory = `${process.env.PROJECT_CWD}/${options.dir}`
-  return sh(`rsync -a --exclude-from='${process.cwd()}/cli-setup-monorepo-exclude-file.txt' ./ ${dst_directory}/`).then((result) => {
+  return sh(`rsync -a --exclude-from='${path.resolve(__dirname,'/cli-setup-monorepo-exclude-file.txt')}' ./ ${dst_directory}/`).then((result) => {
     console.log(result)
   })
   .catch((error) => {
