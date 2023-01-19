@@ -1,0 +1,50 @@
+/* @theme flexiness */
+
+/*////////////////////////////////////////////////////////////////////////////////*/
+/* Normalization */
+/*////////////////////////////////////////////////////////////////////////////////*/
+
+div#p>svg>foreignObject>section :is(h1, marp-h1) {
+  font-size: 2em;
+  margin: 0.67em 0
+}
+
+div#p>svg>foreignObject>section video::-webkit-media-controls {
+  will-change: transform
+}
+
+@page {
+  size: 1280px 720px;
+  margin: 0
+}
+
+@media print {
+
+  body,
+  html {
+    background-color: #fff;
+    margin: 0;
+    page-break-inside: avoid;
+    break-inside: avoid-page
+  }
+
+  div#p>svg>foreignObject>section {
+    page-break-before: always;
+    break-before: page
+  }
+
+  div#p>svg>foreignObject>section,
+  div#p>svg>foreignObject>section * {
+    -webkit-print-color-adjust: exact !important;
+    animation-delay: 0s !important;
+    animation-duration: 0s !important;
+    color-adjust: exact !important;
+    transition: none !important
+  }
+
+  div#p>svg[data-marpit-svg] {
+    display: block;
+    height: 100vh;
+    width: 100vw
+  }
+}

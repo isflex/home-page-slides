@@ -45,7 +45,7 @@ h1 {
 
 <!-- class: invert -->
 
-![bg](./assets/margritte.jpg)
+<!-- ![Marp bg](./assets/margritte.jpg) -->
 
 # <!--fit--> Ceci n'est pas
 
@@ -98,6 +98,9 @@ h1 {
 <!-- _color: "#32325d" -->
 
 <style scoped>
+section {
+  background: transparent;
+}
 h1 {
   letter-spacing: .2em;
   text-transform: uppercase;
@@ -121,6 +124,19 @@ a {
   color: #109db9;
   text-decoration: underline;
 }
+
+/* @media is more specific than @container */
+/* @container flex-slides (max-width: 700px) {
+  h1 {
+    color: red;
+  }
+}
+
+@media (max-width: 700px) {
+  h1 {
+    color: blue;
+  }
+} */
 </style>
 
 ---

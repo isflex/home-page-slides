@@ -10,6 +10,6 @@ const ogImage = (() => {
 module.exports = {
   allowLocalFiles: true,
   ogImage,
-  themeSet: 'src/marp/themes/flexiness',
+  themeSet: './src/marp/themes/flexiness',
   url: canonicalUrl,
 }

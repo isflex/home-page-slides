@@ -45,6 +45,7 @@ __metadata:
   dependencies:
     "@marp-team/marp-cli": ^2.3.0
     "@telenko/node-mf": 0.0.7
+    "@types/node": ^18.0.3
     "@types/react": 18.0.26
     "@types/react-dom": ^18.0.6
     "@types/react-helmet": 6.1.5
@@ -52,6 +53,7 @@ __metadata:
     crypto-browserify: 3.12.0
     css-loader: ^6.7.1
     dotenv-expand: 9.0.0
+    dotenv-webpack: 8.0.1
     env-cmd: ^10.1.0
     express: 4.18.2
     file-loader: 6.2.0
@@ -299,7 +301,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:*":
+"@types/node@npm:*, @types/node@npm:^18.0.3":
   version: 18.11.18
   resolution: "@types/node@npm:18.11.18"
   checksum: 03f17f9480f8d775c8a72da5ea7e9383db5f6d85aa5fefde90dd953a1449bd5e4ffde376f139da4f3744b4c83942166d2a7603969a6f8ea826edfb16e6e3b49d
@@ -1646,10 +1648,37 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dotenv-defaults@npm:^2.0.2":
+  version: 2.0.2
+  resolution: "dotenv-defaults@npm:2.0.2"
+  dependencies:
+    dotenv: ^8.2.0
+  checksum: c005960bd048e2189c4799e729c41f362e415e6e0b54313d3f31e853a84b049bf770b25cb21c112c2805bb13a8376edc9de451fb514abf8546392d327c27f6e5
+  languageName: node
+  linkType: hard
+
 "dotenv-expand@npm:9.0.0":
   version: 9.0.0
   resolution: "dotenv-expand@npm:9.0.0"
   checksum: 76f669b87da73d6980d1235cb18e9ccd94b294927784a0c06db5e9e98d1090b0605e75ade70880f0cd812af7f61e41367a80feea223d23fd3bd0b82f3409b9ed
+  languageName: node
+  linkType: hard
+
+"dotenv-webpack@npm:8.0.1":
+  version: 8.0.1
+  resolution: "dotenv-webpack@npm:8.0.1"
+  dependencies:
+    dotenv-defaults: ^2.0.2
+  peerDependencies:
+    webpack: ^4 || ^5
+  checksum: ee73eda78df90bcf7446763dfe5e518a2054ed6222783856912d2c6a255fdfc041854e125e036ff2603b06fb44f5234713fad5feecb1e66a54fe78a35a98fb87
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^8.2.0":
+  version: 8.6.0
+  resolution: "dotenv@npm:8.6.0"
+  checksum: 38e902c80b0666ab59e9310a3d24ed237029a7ce34d976796349765ac96b8d769f6df19090f1f471b77a25ca391971efde8a1ea63bb83111bd8bec8e5cc9b2cd
   languageName: node
   linkType: hard
 

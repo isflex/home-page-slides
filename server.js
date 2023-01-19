@@ -14,12 +14,18 @@ var cors = require('cors');
 var regexEscape = require('regex-escape');
 var nocache = require("nocache");
 
-const SERVER_RUNNING = process.env.FLEX_SERVER_RUNNING || 'INFO: Accepting connections at';
-const DOMAIN_NAME = process.env.FLEX_DOMAIN_NAME || 'local.flexiness.com'
-const HOSTNAME = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOSTNAME || DOMAIN_NAME
-const PORT = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PORT || 4008;
-const PROTOCOL = process.env.FLEX_PROTOCOL || 'http'
-const HOST = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST || `${PROTOCOL}://${HOSTNAME}:${PORT}`;
+// const SERVER_RUNNING = process.env.FLEX_SERVER_RUNNING || 'INFO: Accepting connections at';
+// const DOMAIN_NAME = process.env.FLEX_DOMAIN_NAME || 'local.flexiness.com'
+// const HOSTNAME = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOSTNAME || DOMAIN_NAME
+// const PORT = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PORT || 4008;
+// const PROTOCOL = process.env.FLEX_PROTOCOL || 'http'
+// const HOST = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST || `${PROTOCOL}://${HOSTNAME}:${PORT}`;
+
+const SERVER_RUNNING = process.env.FLEX_SERVER_RUNNING
+const DOMAIN_NAME = process.env.FLEX_DOMAIN_NAME
+const HOSTNAME = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOSTNAME
+const PORT = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PORT
+const HOST = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST
 
 function setCustomCacheControl (res, path) {
   if (serveStatic.mime.lookup(path) === 'text/html') {

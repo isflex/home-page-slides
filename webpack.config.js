@@ -5,6 +5,7 @@ const path = require('path')
 const webpack = require('webpack')
 const childProcess = require('child_process')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const { ModuleFederationPlugin } = webpack.container
 const { NodeAsyncHttpRuntime } = require('@telenko/node-mf')
@@ -13,26 +14,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 /* eslint-enable @typescript-eslint/no-var-requires */
 
-const NAME = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_NAME || 'flex_homepage_slides_ts_modfed'
-const DOMAIN_NAME = process.env.FLEX_DOMAIN_NAME || 'local.flexiness.com'
-const HOSTNAME = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOSTNAME || DOMAIN_NAME
-const PORT = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PORT || 4008;
-const PROTOCOL = process.env.FLEX_PROTOCOL || 'http'
-const HOST = process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST || `${PROTOCOL}://${HOSTNAME}:${PORT}`;
-
 const mode = process.env.NODE_ENV || 'production'
 const prod = mode === 'production'
+const rootLocation = process.env.PROJECT_CWD
 
-const rootLocation = './'
-// const rootLocation = require.main.paths[0].split('node_modules')[0].slice(0, -1)
+console.log('host : ', process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST)
 
-// const findWorkspaceRoot = require('find-yarn-workspace-root')
-// const workspacePath = findWorkspaceRoot(__dirname)
-// const rootLocation = path.relative(__dirname, workspacePath)
-console.log('rootLocation : ', rootLocation)
-console.log('host : ', HOST)
-
-// const depsMonorepo = require(`${rootLocation}/package.json`).dependencies
+const depsMonorepo = require(`${rootLocation}/package.json`).dependencies
 const deps = require('./package.json').dependencies
 
 const getConfig = (target) => ({
@@ -48,7 +36,7 @@ const getConfig = (target) => ({
   },
 
   entry: {
-    [`mainEntry_${NAME}`]: [
+    [`mainEntry_${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_NAME}`]: [
       require.resolve('regenerator-runtime/runtime.js'),
       path.resolve(__dirname, 'src/index')
     ],
@@ -70,19 +58,18 @@ const getConfig = (target) => ({
         },
         open: false,
         compress: true,
-        port: new Number(PORT),
+        port: new Number(process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_PORT),
       },
     } : null
   ),
 
-  // mode: 'development',
   mode: mode,
 
   target: target === 'web' ? 'browserslist:last 1 chrome version' : false,
 
   output: {
     path: path.resolve(__dirname, 'build', target),
-    publicPath: `${HOST}/${target}/`,
+    publicPath: `${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_HOST}/${target}/`,
     crossOriginLoading: 'anonymous',
     clean: true,
     filename: '[name].[contenthash].js',
@@ -232,15 +219,15 @@ const getConfig = (target) => ({
 
   plugins: [
     new ModuleFederationPlugin({
-      name: `${NAME}`,
+      name: `${process.env.FLEX_MF_HOMEPAGE_ABOUT_SLIDES_NAME}`,
       filename: 'remoteEntry.js',
       remotes: {},
       exposes: {
         './App': './src/App'
       },
       shared: {
-        // ...depsMonorepo,
         ...deps,
+        ...depsMonorepo,
         react: {
           singleton: true,
           requiredVersion: deps.react,
@@ -313,6 +300,11 @@ const getConfig = (target) => ({
       // as per https://reactjs.org/docs/optimizing-performance.html#webpack
       // 'process.env.NODE_ENV': JSON.stringify('production'),
       'process.env': JSON.stringify(process.env)
+      // ...(mode === 'production' ? {
+      //   'process.env.NODE_ENV': JSON.stringify('production')
+      // } : {
+      //   'process.env.NODE_ENV': JSON.stringify('development')
+      // }),
     }),
     ...(target === 'web'
       ? [
@@ -329,6 +321,10 @@ const getConfig = (target) => ({
       filename: '[name].[contenthash].css',
       chunkFilename: '[id].[contenthash].css',
     }),
+    // new Dotenv({
+    //   path: `${process.env.PROJECT_CWD}/env/public/.env.${process.env.FLEX_MODE}`,
+    //   systemvars: true
+    // }),
   ],
 })
 

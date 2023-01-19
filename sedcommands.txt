@@ -1,0 +1,2 @@
+s~<\/body[^>]*>~&<script type=\"text/javascript\" src=\"js/listen-parent-window-width.js\"><\/script>~
+s+body{background:#000;overflow:hidden}+body{background:transparent;overflow:hidden}+g
